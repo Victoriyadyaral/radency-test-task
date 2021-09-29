@@ -26,7 +26,7 @@ const chooseDistance = (t, k, ls) => {
         return null;
     }
 
-    const sortedLs = ls.sort((a, b) => b - a);
+    const sortedLs = [...ls].sort((a, b) => b - a);
 
     const sumOfDistances = (arr, k) => {
        return  arr.reduce((acc, el, i) => {
@@ -44,20 +44,27 @@ const chooseDistance = (t, k, ls) => {
     };
 
     let totalSum = sumOfDistances(sortedLs, k);
-
+ console.log(ls)
     const checkDistance = (sum) => {
-        if (t >= sum) {
+        console.log(sum)
+        if (t >= sum ) {
             return sum;
         } else {
             sortedLs.shift();
             totalSum = sumOfDistances(sortedLs, k);
             checkDistance(totalSum);
-            return totalSum;
+            return totalSum ? totalSum : null;
         }
+        
     }
 
     return checkDistance(totalSum);
 }
 
-//  console.log(chooseDistance(174, 3, [51, 56, 58, 59, 61])); //173
-//  console.log(chooseDistance(163, 3, [50])); // null
+ //console.log(chooseDistance(173, 3, [50, 55, 56, 57, 58])); //173
+// console.log(chooseDistance(163, 3, [50])); // null
+
+    var ts = [120, 15, 14, 95]
+console.log(chooseDistance(163, 3, ts))
+    
+//console.log(59 + 58 + 56)
