@@ -8,9 +8,9 @@
 // менших або рівних заданій межі t, якщо ця сума існує, або якщо не існує - null.
 // Примітка: не змінюйте змінну ls. 
 
-const makeCombinations = (array, num) => {
+const makeCombinations = (array, num, t) => {
 
-  array = [...array].filter(el => el>=0)
+  array = [...array].filter(el => el>=0 && el<=t)
 
   if (num === array.length) {
     return [array];
@@ -51,7 +51,7 @@ const chooseDistance = (t, k, ls) => {
         return null;
     }
 
-    const combinations = makeCombinations(ls, k)
+    const combinations = makeCombinations(ls, k, t)
 
     let sumOfDistances = [];
 
@@ -66,8 +66,4 @@ const chooseDistance = (t, k, ls) => {
 
     return sortedSum[0] ? sortedSum[0] : null;
         
-};
-
-//var ts = [51, 56, 58, 59, 61]
-
-// console.log(chooseDistance(163, 3, [50]))    
+};    
