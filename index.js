@@ -59,5 +59,5 @@ const chooseDistance = (t, k, ls) => {
     return checkDistance(totalSum);
 }
 
- console.log(chooseDistance(174, 3, [51, 56, 58, 59, 61])); //173
- console.log(chooseDistance(163, 3, [50])); // null
+//  console.log(chooseDistance(174, 3, [51, 56, 58, 59, 61])); //173
+//  console.log(chooseDistance(163, 3, [50])); // null
