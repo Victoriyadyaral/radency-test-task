@@ -8,6 +8,31 @@
 // менших або рівних заданій межі t, якщо ця сума існує, або якщо не існує - null.
 // Примітка: не змінюйте змінну ls. 
 
+const makeCombinations = (array, num) => {
+
+  array = [...array].filter(el => el>=0)
+
+  if (num === array.length) {
+    return [array];
+  }
+
+  if (num === 1) {
+    return array.reduce((acc, cur) => [...acc, [cur]], []);
+  }
+
+    let combs = [];
+    let partOfCombs = [];
+
+  for (let i = 0; i <= array.length - num + 1; i++) {
+    partOfCombs = makeCombinations(array.slice(i + 1), num - 1);
+    for (let j = 0; j < partOfCombs.length; j++) {
+      combs.push([array[i], ...partOfCombs[j]]);
+    }
+  }
+
+  return combs;
+};
+
 
 const chooseDistance = (t, k, ls) => {
 
@@ -26,45 +51,23 @@ const chooseDistance = (t, k, ls) => {
         return null;
     }
 
-    const sortedLs = [...ls].sort((a, b) => b - a);
+    const combinations = makeCombinations(ls, k)
 
-    const sumOfDistances = (arr, k) => {
-       return  arr.reduce((acc, el, i) => {
-            if (el < 0) {
-                return;
-            }
+    let sumOfDistances = [];
 
-            if (k > i) {
-                return acc + el;
-            }
-
-
-            return acc;
-        }, 0);
+    for (let i = 0; i < combinations.length; i++) {
+        const total = combinations[i].reduce((acc, el) => acc + el, 0);
+        sumOfDistances.push(total)
     };
-
-    let totalSum = sumOfDistances(sortedLs, k);
- console.log(ls)
-    const checkDistance = (sum) => {
-        console.log(sum)
-        if (t >= sum ) {
-            return sum;
-        } else {
-            sortedLs.shift();
-            totalSum = sumOfDistances(sortedLs, k);
-            checkDistance(totalSum);
-            return totalSum ? totalSum : null;
-        }
-        
-    }
-
-    return checkDistance(totalSum);
-}
-
- //console.log(chooseDistance(173, 3, [50, 55, 56, 57, 58])); //173
-// console.log(chooseDistance(163, 3, [50])); // null
-
-    var ts = [120, 15, 14, 95]
-console.log(chooseDistance(163, 3, ts))
     
-//console.log(59 + 58 + 56)
+    let sortedSum = sumOfDistances
+        .filter(el => el <= t)
+        .sort((a, b) => b - a);
+
+    return sortedSum[0] ? sortedSum[0] : null;
+        
+};
+
+//var ts = [51, 56, 58, 59, 61]
+
+// console.log(chooseDistance(163, 3, [50]))    
