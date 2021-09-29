@@ -16,7 +16,7 @@ const chooseDistance = (t, k, ls) => {
         return null;
     }
 
-    if (k < 0) {
+    if (k <= 0) {
         alert('Enter the number of city > 0');
         return null;
     }
