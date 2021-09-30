@@ -10,7 +10,7 @@
 
 const makeCombinations = (array, num, t) => {
 
-  array = [...array].filter(el => el>=0 && el<=t)
+  array = [...array].filter(el => el>=0)
 
   if (num === array.length) {
     return [array];
@@ -67,3 +67,5 @@ const chooseDistance = (t, k, ls) => {
     return sortedSum[0] ? sortedSum[0] : null;
         
 };    
+ var ts = [50, 55, 56, 57, 58]
+console.log(chooseDistance(163, 3, ts))  
